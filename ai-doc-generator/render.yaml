@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: ai-doc-generator-api
+    runtime: docker
+    rootDir: backend
+    plan: starter
+    healthCheckPath: /health
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: OPENAI_MODEL
+        value: gpt-4.1-mini
+      - key: OPENAI_EMBEDDING_MODEL
+        value: text-embedding-3-small
+      - key: ALLOWED_ORIGINS
+        sync: false
+      - key: RATE_LIMIT_REQUESTS
+        value: 5
+      - key: RATE_LIMIT_WINDOW_SECONDS
+        value: 3600
