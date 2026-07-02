@@ -5,7 +5,7 @@ This app should be deployed as two public services:
 - Backend API: Render, Railway, Fly.io, or another container host
 - Frontend web app: Vercel, Netlify, or another Next.js host
 
-The OpenAI API key must live only on the backend. Never expose it in the frontend.
+The Groq API key must live only on the backend. Never expose it in the frontend.
 
 ## Recommended MVP Hosting
 
@@ -31,9 +31,9 @@ git push -u origin main
 3. Set these environment variables:
 
 ```env
-OPENAI_API_KEY=your_openai_api_key
-OPENAI_MODEL=gpt-4.1-mini
-OPENAI_EMBEDDING_MODEL=text-embedding-3-small
+GROQ_API_KEY=your_groq_api_key
+GROQ_MODEL=llama-3.3-70b-versatile
+GROQ_BASE_URL=https://api.groq.com/openai/v1
 ALLOWED_ORIGINS=https://your-vercel-app.vercel.app
 RATE_LIMIT_REQUESTS=5
 RATE_LIMIT_WINDOW_SECONDS=3600
@@ -71,5 +71,5 @@ Redeploy the backend.
 
 - The backend includes a basic in-memory rate limiter for `/api/generate`.
 - For heavy public traffic, replace the in-memory limiter with Redis.
-- Keep billing limits enabled on your OpenAI account.
+- Keep billing limits enabled on your Groq account.
 - Add authentication or CAPTCHA before promoting widely.

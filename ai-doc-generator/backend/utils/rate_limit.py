@@ -37,7 +37,7 @@ class InMemoryRateLimitMiddleware(BaseHTTPMiddleware):
         call_next: Callable[[Request], Awaitable[Response]],
     ) -> Response:
         """Reject requests once a client exceeds the configured rate."""
-        if not request.url.path.startswith(self.protected_paths):
+        if request.method == "OPTIONS" or not request.url.path.startswith(self.protected_paths):
             return await call_next(request)
 
         client_id = self._client_id(request)

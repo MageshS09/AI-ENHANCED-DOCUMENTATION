@@ -12,3 +12,4 @@ build/
 coverage/
 *.pyc
 *.log
+tsconfig.tsbuildinfo

@@ -11,9 +11,9 @@ load_dotenv()
 class Settings(BaseSettings):
     """Runtime settings sourced from environment variables."""
 
-    openai_api_key: str = ""
-    openai_model: str = "gpt-4.1-mini"
-    openai_embedding_model: str = "text-embedding-3-small"
+    groq_api_key: str = ""
+    groq_model: str = "llama-3.3-70b-versatile"
+    groq_base_url: str = "https://api.groq.com/openai/v1"
     allowed_origins: str = "http://localhost:3000"
     log_level: str = "INFO"
     rate_limit_requests: int = 5

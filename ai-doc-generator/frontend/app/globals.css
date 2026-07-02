@@ -3,15 +3,307 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 body {
-  background: #f7f8f5;
-  color: #18212f;
+  background-color: #07080e;
+  background-image:
+    radial-gradient(ellipse 70% 45% at 50% -8%, rgba(201, 162, 39, 0.11) 0%, transparent 65%),
+    radial-gradient(ellipse 45% 65% at -5% 55%, rgba(108, 71, 255, 0.09) 0%, transparent 60%),
+    radial-gradient(ellipse 35% 45% at 108% 80%, rgba(108, 71, 255, 0.07) 0%, transparent 55%),
+    linear-gradient(to right, rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+  background-size: auto, auto, auto, 48px 48px, 48px 48px;
+  color: #f0ebe0;
+  font-family: var(--font-sans), ui-sans-serif, system-ui;
 }
 
 button,
 input {
   font: inherit;
+}
+
+::selection {
+  background: rgba(201, 162, 39, 0.28);
+}
+
+/* ─── 3D Logo Icon ─── */
+.logo-icon {
+  background: linear-gradient(145deg, #1c1630 0%, #0d0b1c 100%);
+  box-shadow:
+    0 0 0 1px rgba(201, 162, 39, 0.38),
+    0 0 0 3px rgba(201, 162, 39, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.45),
+    0 6px 20px rgba(0, 0, 0, 0.55),
+    0 2px 6px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(108, 71, 255, 0.18);
+  transition: box-shadow 0.35s ease, transform 0.35s ease;
+}
+
+.logo-icon:hover {
+  box-shadow:
+    0 0 0 1px rgba(201, 162, 39, 0.55),
+    0 0 0 3px rgba(201, 162, 39, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.45),
+    0 10px 28px rgba(0, 0, 0, 0.55),
+    0 4px 8px rgba(0, 0, 0, 0.4),
+    0 0 60px rgba(201, 162, 39, 0.22);
+  transform: translateY(-1px);
+}
+
+/* ─── 3D Badge ─── */
+.badge-3d {
+  background: linear-gradient(135deg, rgba(201, 162, 39, 0.13) 0%, rgba(201, 162, 39, 0.05) 100%);
+  border: 1px solid rgba(201, 162, 39, 0.28);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 2px 10px rgba(0, 0, 0, 0.35),
+    0 0 24px rgba(201, 162, 39, 0.07);
+}
+
+/* ─── Shimmer Gold Text ─── */
+@keyframes shimmer {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+.text-shimmer {
+  background: linear-gradient(
+    90deg,
+    #c9a227 0%,
+    #e8c84a 30%,
+    #f5e07a 55%,
+    #e8c84a 75%,
+    #c9a227 100%
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 5s linear infinite;
+}
+
+/* ─── Classic Ornament Divider ─── */
+.ornament-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ornament-divider span:first-child,
+.ornament-divider span:last-child {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(201, 162, 39, 0.32));
+}
+
+.ornament-divider span:last-child {
+  background: linear-gradient(to left, transparent, rgba(201, 162, 39, 0.32));
+}
+
+/* ─── 3D Glass Panel (form card) ─── */
+.panel-3d {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.065) 0%,
+    rgba(255, 255, 255, 0.025) 55%,
+    rgba(255, 255, 255, 0.04) 100%
+  );
+  border: 1px solid rgba(201, 162, 39, 0.16);
+  border-top-color: rgba(201, 162, 39, 0.30);
+  border-bottom-color: rgba(0, 0, 0, 0.45);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.09),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.22),
+    0 4px 4px rgba(0, 0, 0, 0.14),
+    0 8px 8px rgba(0, 0, 0, 0.14),
+    0 16px 16px rgba(0, 0, 0, 0.13),
+    0 32px 32px rgba(0, 0, 0, 0.11),
+    0 64px 64px rgba(0, 0, 0, 0.08),
+    0 0 80px rgba(201, 162, 39, 0.04);
+  backdrop-filter: blur(28px);
+  transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.45s ease;
+}
+
+.panel-3d:hover {
+  transform: perspective(1200px) rotateX(-1.2deg) translateY(-3px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.11),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.22),
+    0 6px 6px rgba(0, 0, 0, 0.16),
+    0 12px 12px rgba(0, 0, 0, 0.16),
+    0 24px 24px rgba(0, 0, 0, 0.14),
+    0 48px 48px rgba(0, 0, 0, 0.12),
+    0 96px 96px rgba(0, 0, 0, 0.09),
+    0 0 100px rgba(201, 162, 39, 0.07);
+}
+
+/* ─── 3D Input ─── */
+.input-3d {
+  background: rgba(0, 0, 0, 0.38);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-top-color: rgba(0, 0, 0, 0.55);
+  box-shadow:
+    inset 0 2px 8px rgba(0, 0, 0, 0.45),
+    inset 0 1px 3px rgba(0, 0, 0, 0.35);
+  transition: border-color 0.22s, box-shadow 0.22s;
+}
+
+.input-3d:focus {
+  border-color: rgba(201, 162, 39, 0.48);
+  box-shadow:
+    inset 0 2px 8px rgba(0, 0, 0, 0.45),
+    inset 0 1px 3px rgba(0, 0, 0, 0.35),
+    0 0 0 3px rgba(201, 162, 39, 0.12),
+    0 0 24px rgba(201, 162, 39, 0.08);
+}
+
+/* ─── Gold Generate Button ─── */
+.btn-generate {
+  background: linear-gradient(135deg, #c9a227 0%, #e8c84a 45%, #c9a227 100%);
+  background-size: 200% 100%;
+  background-position: 0% 0%;
+  color: #07080e;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.32),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.28),
+    0 4px 18px rgba(201, 162, 39, 0.42),
+    0 2px 6px rgba(0, 0, 0, 0.4),
+    0 1px 2px rgba(0, 0, 0, 0.3);
+  transition: background-position 0.45s ease, transform 0.12s ease, box-shadow 0.12s ease, opacity 0.2s;
+}
+
+.btn-generate:hover:not(:disabled) {
+  background-position: 100% 0%;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.38),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.28),
+    0 6px 26px rgba(201, 162, 39, 0.55),
+    0 3px 8px rgba(0, 0, 0, 0.4),
+    0 1px 2px rgba(0, 0, 0, 0.3);
+  transform: translateY(-1px);
+}
+
+.btn-generate:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow:
+    inset 0 3px 6px rgba(0, 0, 0, 0.25),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.15),
+    0 2px 8px rgba(201, 162, 39, 0.28);
+}
+
+/* ─── Stat Cards ─── */
+.stat-card {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.045) 0%,
+    rgba(255, 255, 255, 0.015) 100%
+  );
+  border: 1px solid rgba(201, 162, 39, 0.13);
+  border-top-color: rgba(201, 162, 39, 0.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 4px 8px rgba(0, 0, 0, 0.22),
+    0 8px 16px rgba(0, 0, 0, 0.16),
+    0 16px 24px rgba(0, 0, 0, 0.11);
+  transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.35s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px) perspective(600px) rotateX(-4deg);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 8px 18px rgba(0, 0, 0, 0.28),
+    0 16px 32px rgba(0, 0, 0, 0.22),
+    0 28px 42px rgba(0, 0, 0, 0.15),
+    0 0 32px rgba(201, 162, 39, 0.06);
+}
+
+/* ─── Output Panel ─── */
+.output-panel {
+  background: linear-gradient(
+    165deg,
+    rgba(255, 255, 255, 0.045) 0%,
+    rgba(255, 255, 255, 0.016) 50%,
+    rgba(255, 255, 255, 0.032) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.065);
+  border-top: 1px solid rgba(201, 162, 39, 0.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 4px 4px rgba(0, 0, 0, 0.16),
+    0 8px 8px rgba(0, 0, 0, 0.16),
+    0 16px 16px rgba(0, 0, 0, 0.15),
+    0 32px 32px rgba(0, 0, 0, 0.13),
+    0 64px 64px rgba(0, 0, 0, 0.10);
+  backdrop-filter: blur(22px);
+}
+
+/* ─── Icon Buttons ─── */
+.icon-btn {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(240, 235, 224, 0.50);
+  background: rgba(255, 255, 255, 0.02);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  transition: all 0.22s;
+}
+
+.icon-btn:hover:not(:disabled) {
+  border-color: rgba(201, 162, 39, 0.32);
+  color: rgba(240, 235, 224, 0.88);
+  background: rgba(201, 162, 39, 0.07);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 0 14px rgba(201, 162, 39, 0.12);
+}
+
+.icon-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.28;
+}
+
+/* ─── Empty state icon box ─── */
+.empty-icon-box {
+  background: linear-gradient(135deg, rgba(201, 162, 39, 0.08), rgba(201, 162, 39, 0.03));
+  border: 1px solid rgba(201, 162, 39, 0.16);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 4px 14px rgba(0, 0, 0, 0.24);
+}
+
+/* ─── Fade-up animation ─── */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.65s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+.animate-fade-up-delay {
+  animation: fade-up 0.65s 0.12s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+/* ─── Scrollbar ─── */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: rgba(201, 162, 39, 0.18);
+  border-radius: 999px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
 }

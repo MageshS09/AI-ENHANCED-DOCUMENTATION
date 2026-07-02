@@ -6,12 +6,12 @@ services:
     plan: starter
     healthCheckPath: /health
     envVars:
-      - key: OPENAI_API_KEY
+      - key: GROQ_API_KEY
         sync: false
-      - key: OPENAI_MODEL
-        value: gpt-4.1-mini
-      - key: OPENAI_EMBEDDING_MODEL
-        value: text-embedding-3-small
+      - key: GROQ_MODEL
+        value: llama-3.3-70b-versatile
+      - key: GROQ_BASE_URL
+        value: https://api.groq.com/openai/v1
       - key: ALLOWED_ORIGINS
         sync: false
       - key: RATE_LIMIT_REQUESTS

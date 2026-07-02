@@ -1,6 +1,6 @@
 # AI Documentation Generator
 
-AI Documentation Generator is a production-ready MVP that creates a professional `README.md` from a public GitHub repository URL. It clones the repository into a temporary directory, extracts project metadata, builds embeddings with OpenAI, stores them in FAISS, retrieves relevant context, and generates Markdown through the OpenAI Responses API.
+AI Documentation Generator is a production-ready MVP that creates a professional `README.md` from a public GitHub repository URL. It clones the repository into a temporary directory, extracts project metadata, builds embeddings with Groq, stores them in FAISS, retrieves relevant context, and generates Markdown through the Groq Responses API.
 
 ## Features
 
@@ -16,7 +16,7 @@ AI Documentation Generator is a production-ready MVP that creates a professional
 ## Tech Stack
 
 - Backend: Python 3.12, FastAPI, GitPython, FAISS, python-dotenv
-- LLM: OpenAI Responses API and OpenAI embeddings
+- LLM: Groq Responses API and Groq embeddings
 - Frontend: Next.js 15, TypeScript, Tailwind CSS, React Markdown
 - Testing: pytest
 
@@ -48,7 +48,7 @@ cp backend/.env.example backend/.env
 cp frontend/.env.example frontend/.env.local
 ```
 
-Set `OPENAI_API_KEY` in `backend/.env`. API keys are never hardcoded.
+Set `GROQ_API_KEY` in `backend/.env`. API keys are never hardcoded.
 
 ## Backend Setup
 
@@ -93,14 +93,20 @@ Or with Docker:
 docker compose up --build
 ```
 
-## Public Deployment
+## 🚀 Public Deployment
 
-For a public web app, deploy the backend and frontend separately:
+To deploy as a **fully working web app** (not localhost):
 
-- Backend API: Render or another Docker-capable host
-- Frontend: Vercel or another Next.js host
+**👉 Follow the complete guide in [PRODUCTION_DEPLOYMENT.md](PRODUCTION_DEPLOYMENT.md)**
 
-Full public deployment steps are in [DEPLOYMENT.md](DEPLOYMENT.md).
+This includes step-by-step instructions for:
+- Pushing to GitHub
+- Deploying backend on Render (~10 min)
+- Deploying frontend on Vercel (~5 min)
+- Configuring environment variables
+- Testing your live app
+
+Your app will be publicly accessible at a URL like: `https://your-app.vercel.app`
 
 ## API
 
