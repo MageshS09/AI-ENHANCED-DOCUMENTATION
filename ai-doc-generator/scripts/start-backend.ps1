@@ -11,7 +11,7 @@ Set-Location "$PSScriptRoot\..\backend"
 
 if (-not (Test-Path ".env")) {
     Copy-Item ".env.example" ".env"
-    Write-Host "Created backend\.env. Add OPENAI_API_KEY before generating documentation."
+    Write-Host "Created backend\.env. Add GROQ_API_KEY before generating documentation."
 }
 
 if (-not (Test-Path ".venv")) {
