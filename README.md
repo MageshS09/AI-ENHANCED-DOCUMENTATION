@@ -214,5 +214,5 @@ The repository includes `render.yaml` (backend as a Docker web service on Render
 
 1. Fork the repository and create a branch (`git checkout -b feature/my-change`).
 2. Make the change and add or update tests in `ai-doc-generator/backend/tests/`.
-3. Run `pytest` in `backend/` and `npm run lint` in `frontend/`.
+3. Run `pytest` in `backend/` and `npm run lint` in `frontend/` (CI runs both, plus `tsc --noEmit`).
 4. Open a pull request describing the change and the reason for it.
