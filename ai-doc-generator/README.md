@@ -1,6 +1,6 @@
 # AI Documentation Generator
 
-AI Documentation Generator is a production-ready MVP that creates a professional `README.md` from a public GitHub repository URL. It clones the repository into a temporary directory, extracts project metadata, builds embeddings with Groq, stores them in FAISS, retrieves relevant context, and generates Markdown through the Groq Responses API.
+AI Documentation Generator is an MVP that creates a draft `README.md` from a public GitHub repository URL. It clones the repository into a temporary directory, extracts project metadata, ranks file summaries locally with TF-IDF, and generates Markdown with Groq's OpenAI-compatible chat completions API. See the [root README](../README.md) for the full overview.
 
 ## Features
 
@@ -8,15 +8,16 @@ AI Documentation Generator is a production-ready MVP that creates a professional
 - Temporary repository cloning with cleanup
 - Ignore rules for `.git`, `node_modules`, `dist`, `build`, `__pycache__`, `.next`, large files, and common generated folders
 - Extraction of directory tree, dependencies, existing README content, Dockerfile presence, `.env.example` variables, and API routes
-- File summaries, embeddings, FAISS retrieval, and grounded README generation
+- File summaries, local TF-IDF retrieval, and grounded README generation
 - FastAPI backend with Pydantic models, structured logging, global exception handling, and pytest tests
 - Next.js 15 frontend with loading state, Markdown preview, copy, download, and error handling
 - Dockerfiles and Docker Compose for local deployment
 
 ## Tech Stack
 
-- Backend: Python 3.12, FastAPI, GitPython, FAISS, python-dotenv
-- LLM: Groq Responses API and Groq embeddings
+- Backend: Python 3.12, FastAPI, GitPython, python-dotenv, `openai` SDK (pointed at Groq)
+- Retrieval: local TF-IDF cosine similarity (no embedding API)
+- LLM: Groq chat completions (`llama-3.3-70b-versatile` by default)
 - Frontend: Next.js 15, TypeScript, Tailwind CSS, React Markdown
 - Testing: pytest
 
@@ -48,14 +49,14 @@ cp backend/.env.example backend/.env
 cp frontend/.env.example frontend/.env.local
 ```
 
-Set `GROQ_API_KEY` in `backend/.env`. API keys are never hardcoded.
+Set `GROQ_API_KEY` in `backend/.env`. API keys are never hardcoded. Set `TRUSTED_PROXY_COUNT` to the number of reverse proxies in front of the API (`1` on Render, `0` if exposed directly) so rate limiting uses the real client address.
 
 ## Backend Setup
 
 ```bash
 cd backend
 python -m venv .venv
-.venv\Scripts\activate
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 uvicorn main:app --reload
 ```

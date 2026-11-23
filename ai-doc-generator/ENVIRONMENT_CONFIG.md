@@ -162,13 +162,14 @@ services:
         sync: false  # Manual entry, not synced
       - key: GROQ_MODEL
         value: llama-3.3-70b-versatile
-        value: text-embedding-3-small
       - key: ALLOWED_ORIGINS
         sync: false  # Update after frontend is live
       - key: RATE_LIMIT_REQUESTS
         value: 5
       - key: RATE_LIMIT_WINDOW_SECONDS
         value: 3600
+      - key: TRUSTED_PROXY_COUNT
+        value: 1  # reverse proxies in front of the API (1 on Render, 0 if exposed directly)
 ```
 
 ### Frontend (Vercel)
