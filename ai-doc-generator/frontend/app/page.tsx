@@ -16,6 +16,20 @@ import { useEffect, useMemo, useState } from "react";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
+/**
+ * Turn an API error body into a readable message. FastAPI returns `detail` as a
+ * string for handled errors but as a list of objects for request validation
+ * failures (HTTP 422), which would otherwise render as "[object Object]".
+ */
+function describeError(data: unknown, status: number): string {
+  const detail = (data as { detail?: unknown } | null)?.detail;
+  if (typeof detail === "string" && detail) return detail;
+  if (Array.isArray(detail) && detail.length > 0) {
+    return "Enter a valid public GitHub repository URL, e.g. https://github.com/owner/repository.";
+  }
+  return `Unable to generate README.md (HTTP ${status}).`;
+}
+
 export default function Home() {
   const [repositoryUrl, setRepositoryUrl] = useState("");
   const [markdown, setMarkdown] = useState("");
@@ -47,9 +61,13 @@ export default function Home() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ repository_url: repositoryUrl.trim() }),
       });
-      const data = await response.json();
+      // A proxy or gateway failure can return HTML instead of JSON.
+      const data = await response.json().catch(() => null);
       if (!response.ok) {
-        throw new Error(data.detail ?? "Unable to generate README.md.");
+        throw new Error(describeError(data, response.status));
+      }
+      if (typeof data?.markdown !== "string") {
+        throw new Error("The server returned an unexpected response.");
       }
       setMarkdown(data.markdown);
     } catch (caught) {
