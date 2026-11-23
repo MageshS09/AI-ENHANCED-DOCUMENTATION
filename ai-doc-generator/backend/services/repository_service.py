@@ -1,12 +1,11 @@
 """Repository cloning and cleanup."""
 
 import tempfile
+from collections.abc import Iterator
 from contextlib import contextmanager
 from pathlib import Path
-from typing import Iterator
 
-from git import GitCommandError
-from git import Repo
+from git import GitCommandError, Repo
 
 from utils.exceptions import RepositoryCloneError
 from utils.validation import normalize_github_url
@@ -22,7 +21,14 @@ class RepositoryService:
         with tempfile.TemporaryDirectory(prefix="ai-doc-generator-") as tmpdir:
             destination = Path(tmpdir) / clone_url.rstrip("/").split("/")[-1].removesuffix(".git")
             try:
-                Repo.clone_from(clone_url, destination, multi_options=["--depth=1"])
+                # GIT_TERMINAL_PROMPT=0 makes git fail fast on repositories that
+                # require credentials instead of waiting for input that never comes.
+                Repo.clone_from(
+                    clone_url,
+                    destination,
+                    multi_options=["--depth=1"],
+                    env={"GIT_TERMINAL_PROMPT": "0"},
+                )
             except GitCommandError as exc:
                 raise RepositoryCloneError() from exc
             yield destination

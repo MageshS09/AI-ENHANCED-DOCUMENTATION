@@ -18,3 +18,5 @@ services:
         value: 5
       - key: RATE_LIMIT_WINDOW_SECONDS
         value: 3600
+      - key: TRUSTED_PROXY_COUNT
+        value: 1

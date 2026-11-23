@@ -25,3 +25,10 @@ class ConfigurationError(AppError):
 
     status_code = 500
     public_message = "Server configuration is incomplete."
+
+
+class LLMGenerationError(AppError):
+    """Raised when the language model provider fails or returns no content."""
+
+    status_code = 502
+    public_message = "The language model service failed to generate a README. Please try again."

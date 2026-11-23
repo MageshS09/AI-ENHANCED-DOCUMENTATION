@@ -18,6 +18,8 @@ class Settings(BaseSettings):
     log_level: str = "INFO"
     rate_limit_requests: int = 5
     rate_limit_window_seconds: int = 3600
+    # Reverse proxies in front of the app that append to X-Forwarded-For (1 on Render, 0 if exposed directly).
+    trusted_proxy_count: int = 1
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 

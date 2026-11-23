@@ -1,5 +1,7 @@
 from pathlib import Path
+
 from parsers.repository_parser import RepositoryParser
+
 
 def test_parser_extracts_metadata(tmp_path: Path) -> None:
     """It extracts dependency, env, docker, and endpoint metadata."""

@@ -1,7 +1,7 @@
 """FastAPI entrypoint for the AI Documentation Generator backend."""
 
+from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
-from typing import AsyncIterator
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -42,6 +42,7 @@ app.add_middleware(
     InMemoryRateLimitMiddleware,
     requests_per_window=settings.rate_limit_requests,
     window_seconds=settings.rate_limit_window_seconds,
+    trusted_proxies=settings.trusted_proxy_count,
 )
 
 
